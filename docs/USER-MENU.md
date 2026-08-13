@@ -100,7 +100,7 @@ The panel's content is mock data local to the component (this is a
 showcase, not a wired-up feature):
 
 ```ts
-protected readonly user = { initials: 'PCT', firstName: 'Ajeshkumar', lastName: 'Parna', online: true };
+protected readonly user = { initials: 'PCT', firstName: 'John', lastName: 'Doe', online: true };
 protected readonly devices: Device[] = [ /* phone + badge chips */ ];
 protected readonly dutyProfiles = ["St. Mary's Hospital", /* ...4 more */];
 protected readonly selectedDutyProfile = signal(this.dutyProfiles[0]);

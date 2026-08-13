@@ -41,8 +41,8 @@ export class UserMenu {
 
   protected readonly user = {
     initials: 'PCT',
-    firstName: 'Ajeshkumar',
-    lastName: 'Parna',
+    firstName: 'John',
+    lastName: 'Doe',
     online: true,
   };
 
