@@ -1,0 +1,52 @@
+<header class="modal-header">
+  <h2>{{ data.title }}</h2>
+  <button mat-icon-button aria-label="Close" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+
+<mat-tab-group class="modal-tabs">
+  <mat-tab label="General">
+    <div class="tab-content">
+      <mat-slide-toggle [checked]="emailAlerts()" (change)="emailAlerts.set($event.checked)">
+        Email alerts
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="smsAlerts()" (change)="smsAlerts.set($event.checked)">
+        SMS alerts
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="weeklyDigest()" (change)="weeklyDigest.set($event.checked)">
+        Weekly digest email
+      </mat-slide-toggle>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Preferences">
+    <div class="tab-content">
+      <mat-form-field appearance="outline" class="timezone-field">
+        <mat-label>Timezone</mat-label>
+        <mat-select [value]="timezone()" (selectionChange)="timezone.set($event.value)">
+          @for (tz of timezones; track tz) {
+            <mat-option [value]="tz">{{ tz }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <p class="hint">Applies to timestamps shown throughout the app (demo only).</p>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Advanced">
+    <div class="tab-content">
+      <p class="hint">Nothing here yet &mdash; this tab is a placeholder.</p>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<footer class="modal-footer">
+  @if (saved()) {
+    <span class="saved-confirmation">
+      <mat-icon>check_circle</mat-icon>
+      Saved (demo only)
+    </span>
+  }
+  <button mat-flat-button color="primary" (click)="save()">Save</button>
+</footer>

@@ -1,0 +1,109 @@
+<section class="intro">
+  <h1>Ticker Search</h1>
+  <p>
+    A typeahead search box built directly on CDK's <code>cdkConnectedOverlay</code> directive
+    &mdash; anchored to the input (not a button), width-matched to it, with live-filtered results as
+    you type.
+  </p>
+</section>
+
+<div class="search-wrapper" #searchWrapper cdkOverlayOrigin #origin="cdkOverlayOrigin">
+  <mat-icon class="search-icon">search</mat-icon>
+  <input
+    type="text"
+    class="search-input"
+    placeholder="Search tickers, companies..."
+    [value]="query()"
+    (focus)="onFocus()"
+    (input)="onInput($event)"
+    (keydown.escape)="close()"
+  />
+</div>
+
+@if (selectedResult(); as selected) {
+  <div class="selected-summary">
+    <mat-icon [class]="trendClass(selected.changePercent)">{{
+      trendIcon(selected.changePercent)
+    }}</mat-icon>
+    <span class="selected-symbol">{{ selected.symbol }}</span>
+    <span class="selected-name">{{ selected.name }} &middot; {{ selected.exchange }}</span>
+    <span class="selected-price">{{ selected.price }}</span>
+    <span class="price-change" [class]="trendClass(selected.changePercent)">
+      {{ formatChange(selected.changePercent) }}
+    </span>
+  </div>
+}
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="isOpen()"
+  [cdkConnectedOverlayWidth]="overlayWidth()"
+  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="close()"
+  (detach)="close()"
+>
+  <div class="results-panel">
+    <div class="filter-chips">
+      <button
+        type="button"
+        class="chip"
+        [class.selected]="filterType() === 'all'"
+        (click)="setFilter('all')"
+      >
+        All
+      </button>
+      <button
+        type="button"
+        class="chip"
+        [class.selected]="filterType() === 'stock'"
+        (click)="setFilter('stock')"
+      >
+        Stock
+      </button>
+      <button
+        type="button"
+        class="chip"
+        [class.selected]="filterType() === 'etf'"
+        (click)="setFilter('etf')"
+      >
+        ETF
+      </button>
+    </div>
+
+    <div class="results-list" role="listbox">
+      @for (result of results(); track trackResult($index, result)) {
+        <div
+          class="result-row"
+          role="option"
+          tabindex="0"
+          (click)="selectResult(result)"
+          (keydown.enter)="selectResult(result)"
+        >
+          <div class="result-main">
+            <span class="result-symbol">{{ result.symbol }}</span>
+            <span class="result-name">{{ result.name }} &middot; {{ result.exchange }}</span>
+          </div>
+          <div class="result-price">
+            <span class="price-value">{{ result.price }}</span>
+            <span class="price-change" [class]="trendClass(result.changePercent)">
+              {{ formatChange(result.changePercent) }}
+              <mat-icon>{{ trendIcon(result.changePercent) }}</mat-icon>
+            </span>
+          </div>
+        </div>
+      } @empty {
+        <p class="no-results">No matches for "{{ query() }}"</p>
+      }
+    </div>
+
+    @if (query().trim()) {
+      <button type="button" class="ask-ai-row" (click)="close()">
+        <mat-icon>auto_awesome</mat-icon>
+        Ask AI: '{{ query() }}'
+      </button>
+    }
+  </div>
+</ng-template>

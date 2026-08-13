@@ -17,4 +17,26 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
+
+  code {
+    font: var(--mat-sys-body-medium);
+    background: var(--mat-sys-surface-container-highest);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+}
+
+.topic-card {
+  cursor: pointer;
+  transition: background-color 150ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--mat-sys-surface-container);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--mat-sys-primary);
+    outline-offset: 2px;
+  }
 }

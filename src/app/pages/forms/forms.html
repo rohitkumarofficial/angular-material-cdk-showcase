@@ -1,0 +1,92 @@
+<section class="intro">
+  <h1>Forms</h1>
+  <p>
+    A Reactive Forms showcase across the common Material field types, with validation feedback and
+    one CDK touch &mdash; the notes field uses <code>cdkTextareaAutosize</code> to grow with its
+    content instead of scrolling.
+  </p>
+</section>
+
+<mat-card appearance="outlined" class="form-card">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field-row">
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Full name</mat-label>
+        <input matInput formControlName="fullName" />
+        @if (form.controls.fullName.invalid && form.controls.fullName.touched) {
+          <mat-error>Enter a name (at least 2 characters).</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        @if (form.controls.email.hasError('required') && form.controls.email.touched) {
+          <mat-error>Email is required.</mat-error>
+        } @else if (form.controls.email.hasError('email') && form.controls.email.touched) {
+          <mat-error>Enter a valid email address.</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="field-row">
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          @for (role of roles; track role) {
+            <mat-option [value]="role">{{ role }}</mat-option>
+          }
+        </mat-select>
+        @if (form.controls.role.invalid && form.controls.role.touched) {
+          <mat-error>Select a role.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Start date</mat-label>
+        <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" />
+        <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+        @if (form.controls.startDate.invalid && form.controls.startDate.touched) {
+          <mat-error>Pick a start date.</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="contact-row">
+      <span class="contact-label">Preferred contact</span>
+      <mat-radio-group formControlName="contactMethod" class="contact-options">
+        <mat-radio-button value="email">Email</mat-radio-button>
+        <mat-radio-button value="phone">Phone</mat-radio-button>
+        <mat-radio-button value="sms">SMS</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <mat-slide-toggle formControlName="notify" class="notify-toggle">
+      Notify me about schedule changes
+    </mat-slide-toggle>
+
+    <mat-form-field appearance="outline" class="field notes-field">
+      <mat-label>Notes</mat-label>
+      <textarea
+        matInput
+        formControlName="notes"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="2"
+        cdkAutosizeMaxRows="8"
+      ></textarea>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-stroked-button type="button" (click)="reset()">Reset</button>
+      <button mat-flat-button color="primary" type="submit">Submit</button>
+    </div>
+
+    @if (submitted()) {
+      <p class="submit-confirmation">
+        <mat-icon>check_circle</mat-icon>
+        Submitted (demo only) &mdash; {{ form.value.fullName }}, {{ form.value.role }}
+      </p>
+    }
+  </form>
+</mat-card>

@@ -1,0 +1,93 @@
+.intro {
+  max-width: 720px;
+  margin-bottom: 20px;
+
+  h1 {
+    font: var(--mat-sys-headline-medium);
+    margin: 0 0 8px;
+  }
+
+  p {
+    font: var(--mat-sys-body-large);
+    color: var(--mat-sys-on-surface-variant);
+    margin: 0;
+  }
+
+  code {
+    font: var(--mat-sys-body-medium);
+    background: var(--mat-sys-surface-container-highest);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+}
+
+.form-card {
+  max-width: 640px;
+  padding: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-row {
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: 599px) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.field {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 8px 0 16px;
+}
+
+.contact-label {
+  font: var(--mat-sys-body-medium);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.contact-options {
+  display: flex;
+  gap: 16px;
+}
+
+.notify-toggle {
+  margin-bottom: 16px;
+}
+
+.notes-field {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.submit-confirmation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mat-sys-primary);
+  margin: 12px 0 0;
+
+  mat-icon {
+    color: var(--mat-sys-primary);
+  }
+}
