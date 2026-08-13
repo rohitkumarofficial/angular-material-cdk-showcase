@@ -1,59 +1,47 @@
-# AngularMaterialCdkShowcase
+# Angular Material + CDK Showcase
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.10.
+A living catalog of Angular Material and Angular CDK patterns for the team — each topic is a real, working page with source you can copy straight into your own feature work, not a toy snippet.
 
-## Development server
+Built on Angular 21, standalone components, signals, and a custom Material 3 theme with a color dropdown (Indigo/Teal) and an independent light/dark toggle — see **[docs/THEMING.md](docs/THEMING.md)**.
 
-To start a local development server, run:
+## Topics
 
-```bash
-ng serve
-```
+| Topic | Route | What it shows |
+|---|---|---|
+| **Call Board** | `/call-board` | A mock nurse call-board demonstrating three distinct CDK Overlay patterns side by side (a push-mode reflow panel, a modal slide-in, and a click-positioned popover), CDK virtual scrolling, and a Material table with sort/pagination. See **[docs/CALL-BOARD.md](docs/CALL-BOARD.md)**. |
+| **Ticker Search** | `/ticker-search` | A typeahead search box built on CDK's `cdkConnectedOverlay` directive, anchored to a text input (not a button), width-matched, with live-filtered results as you type. |
+| **Forms** | `/forms` | A Reactive Forms showcase across the common Material field types (input, select, datepicker, radio, slide-toggle) with validation, plus a `cdkTextareaAutosize` field. |
+| **Modal Dialog** | `/modal-demo` | A centered, tabbed modal built directly on `@angular/cdk/dialog`'s `Dialog` service — the CDK primitive `MatDialog` is itself built on. |
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The toolbar's account menu (`shared/user-menu/`) is its own CDK Overlay example — a dropdown built on `cdkConnectedOverlay`, documented in **[docs/USER-MENU.md](docs/USER-MENU.md)**.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Getting started
 
 ```bash
-ng generate --help
+npm install
+npm start        # ng serve, http://localhost:4200
 ```
-
-## Building
-
-To build the project run:
 
 ```bash
-ng build
+npm run build     # production build → dist/
+npm test           # Vitest unit tests
+npx prettier --check "src/**/*.{ts,html,scss}"
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Docs
 
-## Running unit tests
+Deeper write-ups of how specific patterns were built live in **[docs/](docs/)**:
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- **[UNDERSTANDING-MATERIAL-AND-CDK.md](docs/UNDERSTANDING-MATERIAL-AND-CDK.md)** — start here if you're new to Angular Material or CDK. A beginner-friendly, end-to-end walkthrough of this whole project: what Material and CDK each are, where every piece is used, how the animations work with no `@angular/animations` package, how theming works, and why Material is a strong fit over Bootstrap for an Angular app.
+- **[SETUP.md](docs/SETUP.md)** — how the workspace itself was scaffolded (`ng new` flags, tooling, conventions).
+- **[THEMING.md](docs/THEMING.md)** — the two custom M3 color palettes, the light/dark toggle, and the `ThemeService`.
+- **[USER-MENU.md](docs/USER-MENU.md)** — the account-menu CDK Overlay dropdown.
+- **[CALL-BOARD.md](docs/CALL-BOARD.md)** — a full Material + CDK feature reference for the Call Board page.
 
-```bash
-ng test
-```
+## Adding a new topic
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. `ng generate component pages/<topic-name>` (standalone, no module needed).
+2. Add a lazy route in `src/app/app.routes.ts` (`loadComponent`).
+3. Add an entry to `src/app/core/nav-items.ts`.
+4. Add a card linking to it from `src/app/pages/home/home.html`.
+5. Reuse `--mat-sys-*` theme tokens for anything custom — see THEMING.md — so it repaints correctly across all 4 theme combinations for free.
