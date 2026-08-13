@@ -48,7 +48,7 @@ export class UserMenu {
 
   protected readonly devices: Device[] = [
     { icon: 'call', label: '210' },
-    { icon: 'badge', label: 'TagRTLSTest0002' },
+    { icon: 'badge', label: 'Test001' },
   ];
 
   protected readonly dutyProfiles = [

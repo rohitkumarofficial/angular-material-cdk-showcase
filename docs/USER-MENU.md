@@ -182,7 +182,7 @@ rather than by eye alone:
 - Holds up at a 400px mobile viewport.
 
 **One methodology note from that pass:** a first look at the mobile
-screenshot appeared to show the `TagRTLSTest0002` device chip's text
+screenshot appeared to show the `Test001` device chip's text
 clipped at the panel's edge. Before "fixing" it, the actual DOM was
 measured directly (`getBoundingClientRect()` on the panel and the chip's
 text span) rather than trusting the screenshot pixels — the measurements
