@@ -1,0 +1,82 @@
+<button
+  #trigger="cdkOverlayOrigin"
+  cdkOverlayOrigin
+  mat-icon-button
+  aria-label="Account menu"
+  [attr.aria-expanded]="isOpen()"
+  (click)="toggle()"
+>
+  <mat-icon>account_circle</mat-icon>
+</button>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen()"
+  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="close()"
+  (detach)="close()"
+>
+  <div class="user-panel">
+    <header class="user-panel-header">
+      <div class="avatar">
+        <span class="avatar-initials">{{ user.initials }}</span>
+        @if (user.online) {
+          <span class="status-dot" aria-hidden="true"></span>
+        }
+      </div>
+
+      <div class="user-panel-name">
+        <div>{{ user.firstName }}</div>
+        <div>{{ user.lastName }}</div>
+      </div>
+
+      <button mat-flat-button color="primary" class="sign-out" (click)="signOut()">Sign Out</button>
+    </header>
+
+    <mat-divider></mat-divider>
+
+    <section class="user-panel-section">
+      <h3>Devices</h3>
+      <div class="device-list">
+        @for (device of devices; track device.label) {
+          <div class="device-chip">
+            <mat-icon>{{ device.icon }}</mat-icon>
+            <span>{{ device.label }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class="user-panel-section">
+      <h3>Duty Information</h3>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="duty-select">
+        <mat-select
+          [value]="selectedDutyProfile()"
+          (selectionChange)="onDutyProfileChange($event.value)"
+        >
+          @for (profile of dutyProfiles; track profile) {
+            <mat-option [value]="profile">{{ profile }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div class="duty-groups">
+        @for (group of dutyGroups(); track group.name) {
+          <div class="duty-group-row">
+            <span>{{ group.name }}</span>
+            <mat-slide-toggle
+              [checked]="group.enabled"
+              (change)="onDutyGroupToggle(group, $event)"
+            />
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</ng-template>

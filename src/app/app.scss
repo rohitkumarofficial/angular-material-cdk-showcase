@@ -1,0 +1,47 @@
+.shell {
+  height: 100vh;
+}
+
+.shell-nav {
+  width: 240px;
+}
+
+.shell-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  gap: 8px;
+}
+
+.shell-title {
+  font: var(--mat-sys-title-large);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.shell-spacer {
+  flex: 1 1 0;
+  min-width: 8px;
+}
+
+.theme-select {
+  width: 100px;
+  flex: 0 0 auto;
+
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    background: transparent;
+  }
+}
+
+.shell-main {
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.active-link {
+  background: var(--mat-sys-secondary-container);
+}
