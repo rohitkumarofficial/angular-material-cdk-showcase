@@ -61,10 +61,7 @@ export class UserMenu {
   protected readonly selectedDutyProfile = signal(this.dutyProfiles[0]);
 
   protected readonly dutyGroups = signal<DutyGroup[]>([
-    { name: '1AB', enabled: false },
-    { name: 'All', enabled: false },
-    { name: 'BedsPt1', enabled: false },
-    { name: 'BedsPt2', enabled: true },
+    { name: 'All', enabled: false }
   ]);
 
   protected toggle(): void {
