@@ -1,0 +1,33 @@
+<cdk-virtual-scroll-viewport [itemSize]="gridRowHeight" class="call-grid-viewport">
+  <div
+    *cdkVirtualFor="let row of rows(); trackBy: trackByRow"
+    class="call-grid-row"
+    [style.grid-template-columns]="'repeat(' + row.length + ', 1fr)'"
+  >
+    @for (call of row; track call.id) {
+      <mat-card
+        appearance="outlined"
+        class="call-card"
+        [class]="'priority-' + call.priority"
+        [class.selected]="selectedCallId() === call.id"
+        (click)="selectCall(call)"
+      >
+        <div class="call-card-header">
+          <span class="call-card-type">{{ call.type }}</span>
+          <span class="call-card-elapsed">{{ call.elapsed }}</span>
+        </div>
+        <span class="call-card-location">{{ call.unit }} &middot; Room {{ call.room }}</span>
+        <span class="call-card-patient">{{ call.patient.name }}</span>
+
+        <mat-divider></mat-divider>
+
+        <div class="call-card-team">
+          <span class="call-card-team-label">Care team</span>
+          @for (member of call.careTeam.slice(0, 2); track member.name) {
+            <span class="call-card-team-row">{{ member.role }} &ndash; {{ member.name }}</span>
+          }
+        </div>
+      </mat-card>
+    }
+  </div>
+</cdk-virtual-scroll-viewport>

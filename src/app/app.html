@@ -48,7 +48,7 @@
       <app-user-menu />
     </mat-toolbar>
 
-    <main class="shell-main">
+    <main class="shell-main" [class.shell-main-full-width]="isFullWidth()">
       <router-outlet />
     </main>
   </mat-sidenav-content>

@@ -1,0 +1,92 @@
+<header class="popup-header">
+  <div>
+    <h2>{{ call().type }}</h2>
+    <p>{{ call().unit }} &middot; Room {{ call().room }}</p>
+  </div>
+  <button mat-icon-button aria-label="Close" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+
+<mat-tab-group class="popup-tabs" animationDuration="0ms">
+  <mat-tab label="Details">
+    <div class="tab-content details-grid">
+      <div class="detail-field">
+        <span class="detail-label">Facility</span>
+        <span>{{ call().facility }}</span>
+      </div>
+      <div class="detail-field">
+        <span class="detail-label">Patient</span>
+        <span
+          >{{ call().patient.name }} &middot; {{ call().patient.age }} &middot;
+          {{ call().patient.gender }}</span
+        >
+      </div>
+      <div class="detail-field">
+        <span class="detail-label">Physician</span>
+        <span>{{ call().patient.physician }}</span>
+      </div>
+      <div class="detail-field">
+        <span class="detail-label">Priority</span>
+        <span>{{ call().priority }}</span>
+      </div>
+      <div class="detail-field">
+        <span class="detail-label">Elapsed</span>
+        <span>{{ call().elapsed }}</span>
+      </div>
+      @for (member of call().careTeam; track member.name) {
+        <div class="detail-field">
+          <span class="detail-label">{{ member.role }}</span>
+          <span>{{ member.name }}</span>
+        </div>
+      }
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Workflow">
+    <div class="tab-content workflow-grid">
+      @for (action of workflowActions; track action.label) {
+        <button
+          type="button"
+          class="workflow-action"
+          [class.selected]="selectedActions().has(action.label)"
+          (click)="toggleAction(action.label)"
+        >
+          <mat-icon>{{ action.icon }}</mat-icon>
+          <span>{{ action.label }}</span>
+        </button>
+      }
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Notes">
+    <div class="tab-content notes-tab">
+      <mat-form-field appearance="outline" class="notes-field">
+        <mat-label>Add a note</mat-label>
+        <textarea
+          matInput
+          rows="5"
+          [value]="noteText()"
+          (input)="onNoteInput($event)"
+          [disabled]="noteSubmitted()"
+        ></textarea>
+      </mat-form-field>
+
+      @if (noteSubmitted()) {
+        <p class="note-confirmation">
+          <mat-icon>check_circle</mat-icon>
+          Note saved (demo only).
+        </p>
+      } @else {
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!noteText().trim()"
+          (click)="submitNote()"
+        >
+          Submit
+        </button>
+      }
+    </div>
+  </mat-tab>
+</mat-tab-group>

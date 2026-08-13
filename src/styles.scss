@@ -80,3 +80,31 @@ body {
   margin: 0;
   height: 100%;
 }
+
+// The Call RN slide-in overlay (call-rn-overlay.service.ts) attaches this class
+// to the CDK overlay pane, which lives outside any component's view encapsulation
+// (appended directly under .cdk-overlay-container), so its transition lives here.
+.call-rn-overlay-panel {
+  height: 100%;
+  transform: translateX(100%);
+  transition: transform 200ms ease;
+
+  &.is-open {
+    transform: translateX(0);
+  }
+}
+
+// Call Board priority status colors — shared across call-detail-bar and
+// call-card-grid (two separate view-encapsulated components, so this can't
+// live in either of their own stylesheets). Intentionally fixed status
+// colors, not theme tokens — same precedent as shared/user-menu's
+// online-status dot.
+.priority-critical {
+  --priority-color: #c62828;
+}
+.priority-urgent {
+  --priority-color: #e58a00;
+}
+.priority-standard {
+  --priority-color: var(--mat-sys-outline);
+}

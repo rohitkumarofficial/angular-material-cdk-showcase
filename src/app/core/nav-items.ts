@@ -4,4 +4,7 @@ export interface NavItem {
   icon: string;
 }
 
-export const NAV_ITEMS: NavItem[] = [{ path: '/', label: 'Home', icon: 'home' }];
+export const NAV_ITEMS: NavItem[] = [
+  { path: '/', label: 'Home', icon: 'home' },
+  { path: '/call-board', label: 'Call Board', icon: 'emergency' },
+];

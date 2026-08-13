@@ -1,0 +1,121 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  max-width: calc(100vw - 24px);
+  max-height: 70vh;
+  background: var(--mat-sys-surface-container-high);
+  color: var(--mat-sys-on-surface);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.popup-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px 8px 0 16px;
+
+  h2 {
+    margin: 0 0 2px;
+    font: var(--mat-sys-title-medium);
+  }
+
+  p {
+    margin: 0;
+    font: var(--mat-sys-body-small);
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.popup-tabs {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.tab-content {
+  padding: 16px;
+  overflow-y: auto;
+  max-height: 320px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 16px;
+}
+
+.detail-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font: var(--mat-sys-body-medium);
+  min-width: 0;
+}
+
+.detail-label {
+  font: var(--mat-sys-label-small);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.workflow-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 6px;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  background: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+  cursor: pointer;
+  font: var(--mat-sys-body-small);
+
+  mat-icon {
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  &:hover {
+    background: var(--mat-sys-surface-container-highest);
+  }
+
+  &.selected {
+    background: var(--mat-sys-primary-container);
+    border-color: var(--mat-sys-primary);
+
+    mat-icon {
+      color: var(--mat-sys-on-primary-container);
+    }
+  }
+}
+
+.notes-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notes-field {
+  width: 100%;
+}
+
+.note-confirmation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mat-sys-primary);
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+
+  mat-icon {
+    color: var(--mat-sys-primary);
+  }
+}

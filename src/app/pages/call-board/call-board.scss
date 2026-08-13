@@ -1,0 +1,87 @@
+.board-intro {
+  max-width: 720px;
+  margin-bottom: 16px;
+
+  h1 {
+    font: var(--mat-sys-headline-medium);
+    margin: 0 0 8px;
+  }
+
+  p {
+    font: var(--mat-sys-body-large);
+    color: var(--mat-sys-on-surface-variant);
+    margin: 0;
+  }
+}
+
+.board-shell {
+  background: transparent;
+}
+
+.board-tabs {
+  padding-top: 8px;
+
+  // Restyle the MDC tab header as angled "folder tabs" (reference-inspired,
+  // colored with our own theme tokens rather than the reference's literal
+  // colors). mat-tab-group itself stays untouched — only its header CSS is
+  // overridden, so keyboard nav / ARIA / lazy tab-content are unaffected.
+  ::ng-deep {
+    .mdc-tab-indicator {
+      display: none;
+    }
+
+    .mat-mdc-tab-header {
+      border-bottom: none;
+    }
+
+    .mat-mdc-tab-labels {
+      gap: 0;
+    }
+
+    .mdc-tab {
+      position: relative;
+      // A parallelogram (both edges slant the SAME direction), not a
+      // symmetric trapezoid. A symmetric trapezoid's bottom corners recede
+      // inward on BOTH sides, so neighboring tabs' bottom corners diverge
+      // from each other no matter what margin is used, leaving a permanent
+      // triangular gap at the seam. With a single-direction slant, the
+      // 16px horizontal shift is constant top-to-bottom, so a -16px margin
+      // makes each tab's right edge land exactly on the next tab's left
+      // edge at every y — a clean seam, not an overlap needing a z-index
+      // trick to hide a gap.
+      clip-path: polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+      background: var(--mat-sys-surface-container-highest);
+      margin-right: -16px;
+      padding: 0 28px;
+      transition: background-color 150ms ease;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      &:hover:not(.mdc-tab--active) {
+        background: var(--mat-sys-surface-container-high);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--mat-sys-primary);
+        outline-offset: -2px;
+        z-index: 2;
+      }
+    }
+
+    .mdc-tab__text-label {
+      color: var(--mat-sys-on-surface-variant);
+      font: var(--mat-sys-label-large);
+    }
+
+    .mdc-tab--active {
+      background: var(--mat-sys-primary);
+      z-index: 1;
+
+      .mdc-tab__text-label {
+        color: var(--mat-sys-on-primary);
+      }
+    }
+  }
+}

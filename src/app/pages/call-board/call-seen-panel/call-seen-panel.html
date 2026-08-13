@@ -1,0 +1,30 @@
+@if (call(); as activeCall) {
+  <header class="seen-panel-header">
+    <div>
+      <h2>Call seen</h2>
+      <p>{{ activeCall.type }} &middot; {{ activeCall.unit }}</p>
+    </div>
+    <button mat-icon-button aria-label="Close" (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <mat-divider></mat-divider>
+
+  <section class="seen-panel-body">
+    <div class="seen-field">
+      <span class="seen-label">Patient</span>
+      <span>{{ activeCall.patient.name }} &middot; Room {{ activeCall.room }}</span>
+    </div>
+
+    <div class="seen-field">
+      <span class="seen-label">Acknowledged by</span>
+      <span>You &middot; just now</span>
+    </div>
+
+    <p class="seen-note">
+      This panel stays docked to the right and pushes the page content over &mdash; it does not
+      cover it. Click the eye icon again on this call to dismiss it.
+    </p>
+  </section>
+}

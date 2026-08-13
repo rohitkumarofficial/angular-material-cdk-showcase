@@ -1,3 +1,10 @@
+:host {
+  .mat-mdc-list-base {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
 .shell {
   height: 100vh;
 }
@@ -40,6 +47,11 @@
   padding: 24px;
   max-width: 1100px;
   margin: 0 auto;
+}
+
+.shell-main-full-width {
+  max-width: none;
+  margin: 0;
 }
 
 .active-link {

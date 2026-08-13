@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  padding: 20px 0 24px;
+}
+
+.table-wrapper {
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.triaged-table {
+  width: 100%;
+
+  ::ng-deep tr.mat-mdc-row {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--mat-sys-surface-container);
+    }
+  }
+}
+
+.action-active {
+  background: var(--mat-sys-secondary-container);
+}

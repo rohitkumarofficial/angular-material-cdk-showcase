@@ -1,0 +1,47 @@
+<header class="rn-panel-header">
+  <div>
+    <h2>Call RN</h2>
+    <p>{{ call().type }} &middot; {{ call().unit }}</p>
+  </div>
+  <button mat-icon-button aria-label="Close" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+
+<mat-divider></mat-divider>
+
+<section class="rn-panel-body">
+  <div class="rn-field">
+    <span class="rn-label">Patient</span>
+    <span
+      >{{ call().patient.name }} &middot; {{ call().patient.age }} &middot;
+      {{ call().patient.gender }}</span
+    >
+  </div>
+
+  <div class="rn-field">
+    <span class="rn-label">Room</span>
+    <span>{{ call().facility }} &middot; {{ call().unit }} &middot; {{ call().room }}</span>
+  </div>
+
+  <div class="rn-field">
+    <span class="rn-label">Assigned RN</span>
+    @for (member of call().careTeam; track member.name) {
+      @if (member.role === 'RN') {
+        <span>{{ member.name }}</span>
+      }
+    }
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <p class="rn-note">
+    Placing a call to the assigned RN for this room. This panel is a UI demo only &mdash; no call is
+    actually placed.
+  </p>
+
+  <button mat-flat-button color="primary" (click)="onClose()">
+    <mat-icon>call</mat-icon>
+    Call RN now
+  </button>
+</section>

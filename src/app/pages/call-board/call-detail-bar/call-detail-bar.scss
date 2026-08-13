@@ -1,0 +1,73 @@
+:host {
+  display: block;
+}
+
+.detail-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-left: 4px solid var(--priority-color);
+}
+
+.detail-bar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-bar-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.priority-chip {
+  font: var(--mat-sys-label-large);
+  color: var(--priority-color);
+}
+
+.detail-bar-elapsed {
+  font: var(--mat-sys-label-large);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.detail-bar-location {
+  font: var(--mat-sys-body-medium);
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.detail-bar-patient {
+  margin: 0;
+  font: var(--mat-sys-body-large);
+}
+
+.detail-bar-team {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font: var(--mat-sys-body-medium);
+}
+
+.detail-bar-team-label {
+  color: var(--mat-sys-on-surface-variant);
+  margin-right: 4px;
+}
+
+.team-chip {
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--mat-sys-surface-container-highest);
+}
+
+.detail-bar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.action-active {
+  background: var(--mat-sys-secondary-container);
+}

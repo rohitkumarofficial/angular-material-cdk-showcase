@@ -1,0 +1,87 @@
+:host {
+  display: block;
+}
+
+.call-grid-viewport {
+  height: 640px;
+}
+
+.call-grid-row {
+  display: grid;
+  gap: 16px;
+  padding-bottom: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+.call-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  border-left: 4px solid var(--priority-color);
+  cursor: pointer;
+  min-width: 0;
+
+  &:hover {
+    background: var(--mat-sys-surface-container);
+  }
+
+  &.selected {
+    background: var(--mat-sys-secondary-container);
+  }
+}
+
+.call-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.call-card-type {
+  font: var(--mat-sys-label-large);
+  color: var(--priority-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.call-card-elapsed {
+  font: var(--mat-sys-body-medium);
+  color: var(--mat-sys-on-surface-variant);
+  flex: 0 0 auto;
+}
+
+.call-card-location {
+  font: var(--mat-sys-body-medium);
+  color: var(--mat-sys-on-surface-variant);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.call-card-patient {
+  font: var(--mat-sys-body-large);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.call-card-team {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font: var(--mat-sys-body-medium);
+}
+
+.call-card-team-label {
+  color: var(--mat-sys-on-surface-variant);
+  font: var(--mat-sys-label-medium);
+}
+
+.call-card-team-row {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

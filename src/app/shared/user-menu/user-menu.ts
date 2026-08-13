@@ -60,9 +60,7 @@ export class UserMenu {
   ];
   protected readonly selectedDutyProfile = signal(this.dutyProfiles[0]);
 
-  protected readonly dutyGroups = signal<DutyGroup[]>([
-    { name: 'All', enabled: false }
-  ]);
+  protected readonly dutyGroups = signal<DutyGroup[]>([{ name: 'All', enabled: false }]);
 
   protected toggle(): void {
     this.isOpen.update((open) => !open);

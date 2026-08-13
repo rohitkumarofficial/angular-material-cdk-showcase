@@ -1,0 +1,49 @@
+<mat-card appearance="outlined" class="detail-bar" [class]="'priority-' + call().priority">
+  <div class="detail-bar-header">
+    <div class="detail-bar-heading">
+      <span class="priority-chip" [class]="'priority-' + call().priority">{{ call().type }}</span>
+      <span class="detail-bar-elapsed">{{ call().elapsed }}</span>
+    </div>
+    <span class="detail-bar-location"
+      >{{ call().facility }} &middot; {{ call().unit }} &middot; Room {{ call().room }}</span
+    >
+  </div>
+
+  <p class="detail-bar-patient">
+    {{ call().patient.name }} &middot; {{ call().patient.age }} &middot;
+    {{ call().patient.gender }} &middot; {{ call().patient.physician }}
+  </p>
+
+  <mat-divider></mat-divider>
+
+  <div class="detail-bar-team">
+    <span class="detail-bar-team-label">Care team</span>
+    @for (member of call().careTeam; track member.name) {
+      <span class="team-chip">{{ member.role }} &ndash; {{ member.name }}</span>
+    }
+  </div>
+
+  <div class="detail-bar-actions">
+    <button
+      mat-stroked-button
+      [class.action-active]="isSeen()"
+      matTooltip="Toggle call seen"
+      (click)="onCallSeen()"
+    >
+      <mat-icon>visibility</mat-icon>
+      Call Seen
+    </button>
+    <button mat-stroked-button matTooltip="Overhead page (demo only)">
+      <mat-icon>campaign</mat-icon>
+      Overhead
+    </button>
+    <button mat-stroked-button matTooltip="Call room (demo only)">
+      <mat-icon>swap_horiz</mat-icon>
+      Call Room
+    </button>
+    <button mat-flat-button color="primary" matTooltip="Call RN" (click)="onCallRn()">
+      <mat-icon>support_agent</mat-icon>
+      Call RN
+    </button>
+  </div>
+</mat-card>

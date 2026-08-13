@@ -1,0 +1,14 @@
+@if (selectedCall(); as call) {
+  <app-call-detail-bar
+    [call]="call"
+    [isSeen]="state.seenTarget()?.id === call.id"
+    (callSeen)="onCallSeen($event)"
+    (callRn)="onCallRn($event)"
+  />
+}
+
+<app-call-card-grid
+  [calls]="calls"
+  [selectedCallId]="selectedCall()?.id ?? null"
+  (cardSelected)="selectCall($event)"
+/>

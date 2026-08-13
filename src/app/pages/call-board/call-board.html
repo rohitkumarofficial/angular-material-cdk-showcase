@@ -1,0 +1,24 @@
+<section class="board-intro">
+  <h1>Call Board</h1>
+  <p>
+    A mock nurse call-board, built to showcase two different CDK Overlay patterns side by side: a
+    reflow panel and a modal slide-in overlay, plus CDK virtual scrolling and a Material table.
+  </p>
+</section>
+
+<mat-sidenav-container class="board-shell" autosize>
+  <mat-sidenav-content>
+    <mat-tab-group class="board-tabs" animationDuration="150ms">
+      <mat-tab label="Active Calls">
+        <app-active-calls />
+      </mat-tab>
+      <mat-tab label="Triaged Calls">
+        <app-triaged-calls />
+      </mat-tab>
+    </mat-tab-group>
+  </mat-sidenav-content>
+
+  <mat-sidenav mode="side" position="end" [opened]="state.seenTarget() !== null">
+    <app-call-seen-panel [call]="state.seenTarget()" (closed)="state.closeSeen()" />
+  </mat-sidenav>
+</mat-sidenav-container>

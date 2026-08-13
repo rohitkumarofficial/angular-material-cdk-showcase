@@ -1,8 +1,15 @@
 import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map } from 'rxjs';
+import { filter, map, startWith } from 'rxjs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -46,6 +53,24 @@ export class App {
 
   protected readonly sidenavMode = () => (this.isHandset() ? 'over' : 'side');
   protected readonly sidenavOpened = () => !this.isHandset();
+
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+
+  protected readonly isFullWidth = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      startWith(null),
+      map(() => {
+        let current = this.route;
+        while (current.firstChild) {
+          current = current.firstChild;
+        }
+        return !!current.snapshot.data['fullWidth'];
+      }),
+    ),
+    { initialValue: false },
+  );
 
   protected onColorThemeChange(color: ThemeColor): void {
     this.themeService.setColorTheme(color);

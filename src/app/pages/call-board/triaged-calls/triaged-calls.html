@@ -1,0 +1,62 @@
+<div class="table-wrapper">
+  <table mat-table [dataSource]="dataSource" matSort class="triaged-table">
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+      <td mat-cell *matCellDef="let call">{{ call.type }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="elapsed">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Elapsed</th>
+      <td mat-cell *matCellDef="let call">{{ call.elapsed }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef>Unit / Room</th>
+      <td mat-cell *matCellDef="let call">{{ call.unit }} &middot; Room {{ call.room }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="patient">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Patient</th>
+      <td mat-cell *matCellDef="let call">{{ call.patient.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="assignedRn">
+      <th mat-header-cell *matHeaderCellDef>Assigned RN</th>
+      <td mat-cell *matCellDef="let call">{{ assignedRn(call) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let call">
+        <button
+          mat-icon-button
+          [class.action-active]="state.seenTarget()?.id === call.id"
+          matTooltip="Toggle call seen"
+          (click)="$event.stopPropagation(); onCallSeen(call)"
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Call RN"
+          (click)="$event.stopPropagation(); onCallRn(call)"
+        >
+          <mat-icon>support_agent</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="openDetail(row, $event)"
+    ></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[10, 24, 50]"
+    pageSize="10"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
