@@ -1,5 +1,7 @@
 # Angular Material + CDK Showcase
 
+**🔗 Live demo: [rohitkumarofficial.github.io/angular-material-cdk-showcase](https://rohitkumarofficial.github.io/angular-material-cdk-showcase/)** — deployed automatically from `master` via the GitHub Actions workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+
 A living catalog of Angular Material and Angular CDK patterns for the team — each topic is a real, working page with source you can copy straight into your own feature work, not a toy snippet.
 
 Built on Angular 21, standalone components, signals, and a custom Material 3 theme with a color dropdown (Indigo/Teal) and an independent light/dark toggle — see **[docs/THEMING.md](docs/THEMING.md)**.
